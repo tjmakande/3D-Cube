@@ -1,0 +1,68 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="./index.css">
+  <title>Cube Test</title>
+</head>
+
+<body>
+  <div class="scene">
+    <div class="cube">
+      <div class="cube__Face cube__Face--front"> Front</div>
+      <div class="cube__Face cube__Face--back"> Back</div>
+      <div class="cube__Face cube__Face--right"> Right</div>
+      <div class="cube__Face cube__Face--left">Left</div>
+      <div class="cube__Face cube__Face--top">Top</div>
+      <div class="cube__Face cube__Face--bottom">Bottom</div>
+    </div>
+
+    <div class='buttonsContainer'>
+      <button class='front' val=front> front </button>
+      <button class='back' val=back> back</button>
+      <button class='right' val=right>right</button>
+      <button class='left' val=left>left</button>
+      <button class='top' val=top>top</button>
+      <button class='bottom' val=bottom>bottom</button>
+    </div>
+  </div>
+  
+  <script>
+    document.querySelector('.buttonsContainer').addEventListener('click', (e) => {
+      const target = e.target.attributes.val.value
+      switch(target) {
+        case 'top':
+              document.querySelector('.cube').style.transform = 'rotateX(90deg)'
+              break;
+        case 'bottom':
+              document.querySelector('.cube').style.transform = 'rotateX(-90deg)'
+              break;
+        case 'front':
+              document.querySelector('.cube').style.transform = 'rotateY(0deg)'
+              break;
+        case 'right': 
+              document.querySelector('.cube').style.transform = 'rotateY( -90deg)'
+              break;
+        case 'back':
+              document.querySelector('.cube').style.transform = 'rotateY(-180deg)'
+              break;
+        case 'left':
+              document.querySelector('.cube').style.transform = 'rotateY(90deg)';
+              break;
+        default:
+              return;
+      }
+      zoomInReset();
+    })
+
+    const zoomInReset = () => {
+      document.querySelector('.buttonsContainer').style.display = 'none';
+      document.querySelector('.scene').style.animation = 'ZoomInOut 3s forwards'
+      setTimeout(() => {
+        document.querySelector('.scene').style.animation = '';
+        document.querySelector('.buttonsContainer').style.display = 'flex';
+      },3000)
+    }
+  </script>
+</body>
+</html>
