@@ -30,12 +30,17 @@
   <script>
     document.querySelector('.buttonsContainer').addEventListener('click', (e) => {
       const target = e.target.attributes.val.value
+
+      document.querySelector('.expand') ? document.querySelector('.expand').classList.replace('expand', 'shrink') : null;
+
       switch(target) {
         case 'top':
               document.querySelector('.cube').style.transform = 'rotateX(90deg)'
+              checkHeight(document.querySelector('.scene').clientHeight, document.querySelector('.top').clientHeight, document.querySelector('.cube__Face--top') )
               break;
         case 'bottom':
               document.querySelector('.cube').style.transform = 'rotateX(-90deg)'
+              checkHeight(document.querySelector('.scene').clientHeight, document.querySelector('.bottom').clientHeight, document.querySelector('.cube__Face--bottom') )
               break;
         case 'front':
               document.querySelector('.cube').style.transform = 'rotateY(0deg)'
@@ -52,8 +57,22 @@
         default:
               return;
       }
+
+      setTimeout(() => {
+        document.querySelector('.shrink') ? document.querySelector('.shrink').classList.remove('shrink') : null;
+      }, 700);
+
       zoomInReset();
     })
+
+
+    //primarily for top and bottom
+    const checkHeight = (vh, actualHeight, target) => {
+      setTimeout(() => {
+        actualHeight < vh ? target.classList.add('expand'): null;
+      }, 3000);
+    }
+
 
     const zoomInReset = () => {
       document.querySelector('.buttonsContainer').style.display = 'none';
@@ -63,6 +82,7 @@
         document.querySelector('.buttonsContainer').style.display = 'flex';
       },3000)
     }
+
   </script>
 </body>
 </html>
